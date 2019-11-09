@@ -1,0 +1,18 @@
+[
+ {
+   "description": "CEDULA DE CIUDADANIA",
+   "short_name": "C.C"
+ },
+ {
+   "description": "CEDULA DE EXTRANJERIA",
+   "short_name": "C.E"
+ },
+ {
+   "description": "PASAPORTE",
+   "short_name": "PAS"
+ },
+ {
+   "description": "INDOCUMENTADO",
+   "short_name": "N.N"
+ }
+]
