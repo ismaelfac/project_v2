@@ -10,7 +10,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-        $countries = Country::paginate(5);
+        $countries = Country::all();
         return response()->json($countries, 200);
     }
     /**

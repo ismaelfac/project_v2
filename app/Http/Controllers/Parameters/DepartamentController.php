@@ -18,7 +18,7 @@ class DepartamentController extends Controller
     public function index()
     {
         $departaments = Departament::getDepartamentAttribute();
-        return view('admin2.parameters.departaments.index', compact('departaments'));
+        return response()->json($departaments, 200);
     }
 
     /**
@@ -69,7 +69,7 @@ class DepartamentController extends Controller
     {
         $departament->update($request::all()); //update dep$departament
         $departament->country()->sync($request->get('country')); //update country
-        return redirect()->route('departaments.edit', $user->id)->with('info', 'Estado Actualizado con Exito');
+        return redirect()->route('departaments.edit')->with('info', 'Estado Actualizado con Exito');
     }
 
     /**
