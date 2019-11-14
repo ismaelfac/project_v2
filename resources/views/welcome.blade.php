@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>App</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />   
+    
         <!-- Styles -->
         <style>
             html, body {
@@ -64,7 +65,7 @@
         </style>
     </head>
     <body>
-        <div id="example"></div>
+        <div id="app"></div>
     </body>
     <script src="./js/app.js"></script>
 </html>

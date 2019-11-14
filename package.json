@@ -23,5 +23,38 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.6.1",
+        "@material-ui/icons": "^4.5.1",
+        "@material-ui/styles": "^4.5.0",
+        "axios": "^0.19.0",
+        "formik": "^1.5.8",
+        "json-server": "^0.15.1",
+        "lodash": "^4.17.11",
+        "mocha": "^6.2.2",
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2",
+        "react-redux": "^7.1.1",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.2.0",
+        "react-vis": "^1.11.7",
+        "redux": "^4.0.4",
+        "redux-actions": "^2.6.5"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }
