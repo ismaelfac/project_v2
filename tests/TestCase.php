@@ -26,6 +26,7 @@ abstract class TestCase extends BaseTestCase
         if(!$rol->all()){
             $this->createRol('Super Admin');
         }
+        
         $user = $this->createUser()->assignRole('Super Admin');
         return $user;
     }
