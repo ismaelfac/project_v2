@@ -29,7 +29,7 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_create_roles_unit()
     {
         //Arrange
-            $user = $this->createUser();
+            $user = $this->createAdmin();
             $this->be($user);
         //Act
             $response = $this->withHeaders([

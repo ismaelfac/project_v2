@@ -22,7 +22,10 @@ abstract class TestCase extends BaseTestCase
 
     protected function createAdmin()
     {
-        $this->createRol('Super Admin');
+        $rol = Role::get('name','Super Admin');
+        if(!$rol->all()){
+            $this->createRol('Super Admin');
+        }
         $user = $this->createUser()->assignRole('Super Admin');
         return $user;
     }
