@@ -17,7 +17,6 @@ class PostPolicyTest extends TestCase
     {
         //Arrange
         $admin = $this->createAdmin();
-        dd($admin);
         $this->be($admin);
 
         $post = factory(Post::class)->create();

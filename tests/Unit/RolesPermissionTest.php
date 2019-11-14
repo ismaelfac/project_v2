@@ -6,10 +6,6 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-/* Metodos Spatie Permission */
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use App\User;
 
 class RolesPermissionTest extends TestCase
 {
@@ -20,9 +16,8 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_view_roles_unit()
     {
         //Arrange
-            //crear usuario existente como persona.
-            //crea Usuario
-            //lo asigno como administrador.
+        $user = $this->createAdmin();
+        $this->be($user);
         //Act
         $response = $this->get('api/roles');
         //assert
@@ -34,21 +29,28 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_create_roles_unit()
     {
         //Arrange
-            //crear usuario existente como persona.
-            $user = $this->createAdmin();
-            dd($user);
+            $user = $this->createUser();
             $this->be($user);
-            //lo asigno como Super administrador.
         //Act
-
+            $response = $this->withHeaders([
+                'X-Header' => 'Value',
+            ])->json('POST', '/api/roles', ['name' => 'Supervisor']);
         //assert
-
+            $response->assertStatus(200);
     }
 
     /**
      * @test
      */
-    function edit_roles_nit()
+    function users_admin_can_edit_roles_unit()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+        /**
+     * @test
+     */
+    function users_admin_can_destroy_roles_unit()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

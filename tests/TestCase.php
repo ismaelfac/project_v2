@@ -11,6 +11,10 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    protected function createRol($rol)
+    {
+        return Role::create(['name' => $rol]);
+    }
     protected function createUser()
     {
         return factory(User::class)->create();
@@ -18,8 +22,8 @@ abstract class TestCase extends BaseTestCase
 
     protected function createAdmin()
     {
-        Role::create(['name' => 'Super Admin']);
-        $user = $this->createUser();
-        return $user->assignRole('Super Admin');
+        $this->createRol('Super Admin');
+        $user = $this->createUser()->assignRole('Super Admin');
+        return $user;
     }
 }
