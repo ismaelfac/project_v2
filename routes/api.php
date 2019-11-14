@@ -13,5 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 Route::group(['middleware' => ['cors']], function () {
+    Route::resource('roles', 'Auth\RoleController');
     Route::resource('country', 'Parameters\CountryController');
 });

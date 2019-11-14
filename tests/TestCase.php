@@ -4,6 +4,8 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -16,6 +18,8 @@ abstract class TestCase extends BaseTestCase
 
     protected function createAdmin()
     {
-        return factory(User::class)->states('admin')->create();
+        Role::create(['name' => 'Super Admin']);
+        $user = $this->createUser();
+        return $user->assignRole('Super Admin');
     }
 }
