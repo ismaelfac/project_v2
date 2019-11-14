@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'civilstatuses'
         ]);
         $this->call([
+            RoleTableSeeder::class,
             CountryTableSeeder::class,
             DepartamentTableSeeder::class,
             MunicipalityTableSeeder::class,
