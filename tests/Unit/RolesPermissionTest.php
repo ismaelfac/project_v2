@@ -17,8 +17,7 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_view_roles_unit()
     {
         //Arrange
-        $user = $this->createAdmin();
-        $this->be($user);
+        $this->authorUser();
         //Act
         $response = $this->get('api/roles');
         //assert
@@ -30,8 +29,7 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_create_roles_unit()
     {
         //Arrange
-            $user = $this->createAdmin();
-            $this->be($user);
+            $this->authorUser();
         //Act
             $response = $this->withHeaders([
                 'X-Header' => 'Value',

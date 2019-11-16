@@ -11,6 +11,13 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    protected function authorUser($user = null)
+    {
+        $user = $this->createAdmin();
+        return $this->be($user);
+
+    }
+
     protected function createRol($rol)
     {
         return Role::create(['name' => $rol]);
