@@ -1,7 +1,8 @@
 import {createStore, combineReducers } from 'redux';
+import roles from "./reducers/roles";
 
 const reducer = combineReducers({
-    
+    roles
 });
 
 const globalState = localStorage.getItem('GLOBAL_STATE');

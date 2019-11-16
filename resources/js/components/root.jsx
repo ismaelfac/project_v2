@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { saveState } from '../redux/store';
 //************ Components   ********************/
-import Roles from './panel/dashboard';
+import roles from './index';
 
 class Root extends Component{
     
@@ -12,7 +12,7 @@ class Root extends Component{
     render() {
         return (
             <Switch>
-                <Route path="/roles" component={Roles}/>
+                <Route path="/roles" component={roles}/>
                 <Redirect from="/" to="/roles" />
             </Switch> 
         );
