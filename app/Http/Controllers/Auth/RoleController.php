@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -59,7 +60,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        
     }
 
     /**
@@ -69,11 +70,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
-        $role->update($request->all()); //update roles
-        $role->permissions()->sync($request->get('permissions')); //update permissions
-        return response()->json($role);
+        if (null == $role = Role::where('id',$request->id)->get()) {
+            throw new ModelNotFoundException("Role not found");
+        }
+        return $role;
+        
     }
 
     /**

@@ -43,7 +43,15 @@ class RolesPermissionTest extends TestCase
      */
     function users_admin_can_edit_roles_unit()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->withoutExceptionHandling();
+        //Arrange
+        $this->authorUser();
+        //Act
+            $response = $this->withHeaders([
+                'X-Header' => 'Value',
+            ])->json('PUT', '/api/roles/{}', ['id' => 4,'name' => 'Cordinador']);
+        //assert
+            $response->assertStatus(Response::HTTP_OK);
     }
 
         /**
