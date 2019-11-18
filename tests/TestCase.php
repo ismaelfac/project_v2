@@ -11,11 +11,10 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    protected function authorUser($user = null)
+    protected function authorUser($nameRol)
     {
-        $user = $this->createAdmin();
+        $user = $this->createUserRol($nameRol);
         return $this->be($user);
-
     }
 
     protected function createRol($rol)
@@ -27,13 +26,13 @@ abstract class TestCase extends BaseTestCase
         return factory(User::class)->create();
     }
 
-    protected function createAdmin()
+    protected function createUserRol($nameRol)
     {
-        $rol = Role::get('name','Super Admin');
+        $rol = Role::get('name',$nameRol);
         if(!$rol->all()){
-            $this->createRol('Super Admin');
+            $this->createRol($nameRol);
         }
-        $user = $this->createUser()->assignRole('Super Admin');
+        $user = $this->createUser()->assignRole($nameRol);
         return $user;
     }
 }

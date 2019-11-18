@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['cors']], function () {
+Route::group(['middleware' => ['cors', 'role:super-admin']], function () {
     Route::resource('roles', 'Auth\RoleController');
+});
+Route::group(['middleware' => ['cors']], function () {
     Route::resource('country', 'Parameters\CountryController');
 });

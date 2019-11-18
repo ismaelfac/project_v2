@@ -17,7 +17,7 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_view_roles_unit()
     {
         //Arrange
-        $this->authorUser();
+        $this->authorUser('super-admin');
         //Act
         $response = $this->get('api/roles');
         //assert
@@ -29,7 +29,7 @@ class RolesPermissionTest extends TestCase
     function users_admin_can_create_roles_unit()
     {
         //Arrange
-            $this->authorUser();
+            $this->authorUser('super-admin');
         //Act
             $response = $this->withHeaders([
                 'X-Header' => 'Value',
@@ -41,11 +41,11 @@ class RolesPermissionTest extends TestCase
     /**
      * @test
      */
-    function users_admin_can_edit_roles_unit()
+    function users_admin_can_update_roles_unit()
     {
         $this->withoutExceptionHandling();
         //Arrange
-        $this->authorUser();
+        $this->authorUser('super-admin');
         //Act
             $response = $this->withHeaders([
                 'X-Header' => 'Value',
@@ -59,6 +59,17 @@ class RolesPermissionTest extends TestCase
      */
     function users_admin_can_destroy_roles_unit()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->withoutExceptionHandling();
+        //Arrange
+        $this->authorUser('super-admin');
+        //Act
+            $response = $this->withHeaders([
+                'X-Header' => 'Value',
+            ])->json('DELETE', '/api/roles/5',['id' => 5]);
+        //assert
+            $this->assertDatabaseMissing('roles',[
+                'id' => 5
+            ]);
+            $response->assertStatus(Response::HTTP_OK);
     }
 }

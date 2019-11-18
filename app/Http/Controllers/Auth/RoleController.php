@@ -72,8 +72,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (null == $role = Role::where('id',$request->id)->get()) {
-            throw new ModelNotFoundException("Role not found");
+        if($existRole = Role::findOrFail($request->id)){
+            Role::whereId($request->id)->update(['name' => $request->name ]);
+            $role = Role::where('id',$request->id)->get();
         }
         return $role;
         
@@ -88,6 +89,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return back()->with('info', 'Eliminado Correctamente');
+        return $role;
     }
 }
