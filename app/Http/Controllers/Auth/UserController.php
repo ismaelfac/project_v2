@@ -31,6 +31,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('updated_at', 'DESC')->paginate(5); //Listo los roles ordenados por la ultima creación y luego los pagino por 5
+        if ($users == null) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
         return response()->json($users); //devuelvo los roles en la variable roles.
     }
 

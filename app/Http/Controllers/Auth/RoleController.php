@@ -84,6 +84,9 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
+        if ($role == null) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
         return $role;
     }
 }
