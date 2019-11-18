@@ -4,13 +4,25 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class PermissionController extends Controller
+
+class UserController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+    use RegistersUsers;
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +30,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission = Permission::orderBy('updated_at', 'DESC')->paginate(5); //Listo los roles ordenados por la ultima creación y luego los pagino por 5
-        return response()->json($permission); //devuelvo los roles en la variable roles.
+        $users = User::orderBy('updated_at', 'DESC')->paginate(5); //Listo los roles ordenados por la ultima creación y luego los pagino por 5
+        return response()->json($users); //devuelvo los roles en la variable roles.
     }
 
     /**
@@ -40,11 +52,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $permission = Permission::create([
-            'name' => $request['name'],
-            'guard_name' => $request['guard_name']
-        ]); //update permissions
-        return response()->json($permission);
+        //
     }
 
     /**
@@ -55,7 +63,14 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'is_active' => $request['is_active'],
+            'customer_id' => $request['customer_id']
+        ]);
+        return response()->json($user);
     }
 
     /**
@@ -73,13 +88,12 @@ class PermissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  model  $permission
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Permission $permission)
+    public function update(Request $request, $id)
     {
-        $permission->update(['name' => $request->name, 'guard_name' => $request->guard_name ]);
-        return $permission;
+        //
     }
 
     /**
@@ -88,9 +102,8 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        $permission->delete();
-        return $permission;
+        //
     }
 }

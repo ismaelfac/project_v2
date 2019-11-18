@@ -37,8 +37,7 @@ class RoleController extends Controller
         $role = Role::create([
             'name' => $request['name']
         ]); //update roles
-        return response()->json($role);
-        
+        return response()->json($role);       
     }
 
     /**
@@ -58,7 +57,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Permission $permission)
     {
         
     }
@@ -70,14 +69,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        if($existRole = Role::findOrFail($request->id)){
-            Role::whereId($request->id)->update(['name' => $request->name ]);
-            $role = Role::where('id',$request->id)->get();
-        }
+        $role->update(['name' => $request->name ]);
         return $role;
-        
     }
 
     /**
