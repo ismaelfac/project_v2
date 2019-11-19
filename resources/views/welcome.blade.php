@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>App</title>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
@@ -65,7 +67,7 @@
         </style>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">You have arrived</div>
     </body>
     <script src="./js/app.js"></script>
 </html>

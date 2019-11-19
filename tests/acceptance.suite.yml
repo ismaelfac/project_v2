@@ -8,6 +8,8 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://localhost/myapp
-        - \Helper\Acceptance
+            url: http://127.0.0.1:8000
+        - Laravel5:
+            part: ORM
+            environment_file: .env.DB_DATABASE_TEST
     step_decorators: ~        
