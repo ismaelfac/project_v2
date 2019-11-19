@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Repositories\Cms\System\RoleRepository;
 
 class RoleController extends Controller
 {
-    public function __construct()
+    /** @var RoleRepository */
+    private $repository;
+
+    public function __construct(RoleRepository $repository)
     {
-        //$this->middleware('auth');
+        $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
@@ -22,8 +23,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::orderBy('updated_at', 'DESC')->paginate(5); //Listo los roles ordenados por la ultima creación y luego los pagino por 5
-        return response()->json($roles); //devuelvo los roles en la variable roles.   
+        return response()->json($this->repository->all());   
     }
 
     /**
@@ -34,32 +34,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::create([
+        $role = $this->repository->create([
             'name' => $request['name']
         ]); //update roles
         return response()->json($role);       
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Permission $permission)
-    {
-        
     }
 
     /**
@@ -69,10 +47,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
-        $role->update(['name' => $request->name ]);
-        return $role;
+        return $this->repository->update($request, $id);
     }
 
     /**
@@ -81,12 +58,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($role)
     {
-        $role->delete();
-        if ($role == null) {
-            abort(Response::HTTP_NOT_FOUND);
-        }
-        return $role;
+        return $this->repository->delete($role);
     }
 }

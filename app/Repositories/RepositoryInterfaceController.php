@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface RepositoryInterface
+interface RepositoryInterfaceController
 {
     public function all();
 

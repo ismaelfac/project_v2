@@ -133,7 +133,6 @@ class RolesPermissionTest extends TestCase
             $this->withHeaders([
                 'X-Header' => 'Value',
             ])->json('POST', '/api/permissions', ['name' => 'create-roles', 'guard_name' => 'web']);
-            //dd($this->get('api/permissions'));
             $response = $this->withHeaders([
                 'X-Header' => 'Value',
             ])->json('DELETE', '/api/permissions/3',['id' => 3]);
