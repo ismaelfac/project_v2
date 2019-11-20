@@ -5,7 +5,7 @@
 use Spatie\Permission\Models\Role;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Role::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(1)
     ];

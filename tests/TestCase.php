@@ -17,10 +17,16 @@ abstract class TestCase extends BaseTestCase
         return $this->be($user);
     }
 
-    protected function createRol($rol)
+    protected function createRol($rol, $cycles = null)
     {
-        return Role::create(['name' => $rol]);
+        return is_null($rol) ? factory(Role::class, $cycles)->create(): Role::create(['name' => $rol]);
     }
+
+    protected function createPermission($permission, $cycles = null)
+    {
+        return is_null($permission) ? factory(Permission::class, $cycles)->create(): Permission::create(['name' => $permission]);
+    }
+    
     protected function createUser()
     {
         return factory(User::class)->create();
