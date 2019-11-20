@@ -143,4 +143,22 @@ class RolesPermissionTest extends TestCase
             ]);
             $response->assertStatus(Response::HTTP_OK);
     }
+
+    //roles givePermissions
+
+    function users_admin_can_give_permission_a_rol_unit()
+    {
+        $this->withoutExceptionHandling();
+        //Arrange
+        $this->authorUser('super-admin');
+        //Act
+        
+            
+        //assert
+            $this->assertDatabaseMissing('role_has_permissions',[
+                'permission_id' => 4,
+                'role_id' => 11
+            ]);
+            $response->assertStatus(Response::HTTP_OK);
+    }
 }

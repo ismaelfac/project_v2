@@ -2,12 +2,11 @@
 
 namespace App\Repositories\Cms\System;
 
-use App\Repositories\Cms\Interfaces\RolePermissionRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RoleRepository implements RolePermissionRepositoryInterface {
+class RoleRepository {
     protected $model;
 
     /**
@@ -18,9 +17,10 @@ class RoleRepository implements RolePermissionRepositoryInterface {
         $this->model = $role;
     }
 
-    public function all()
+    public function all($paginate = null)
     {
-        return $this->model->orderBy('updated_at', 'DESC')->paginate(5);
+        is_null($paginate) ? $paginate = 5 : $paginate; 
+        return $this->model->orderBy('updated_at', 'DESC')->paginate($paginate);
     }
 
     public function create(array $data)
@@ -45,5 +45,10 @@ class RoleRepository implements RolePermissionRepositoryInterface {
         }
 
         return $role;
+    }
+
+    public function givePermissionCmsTo($rol, $permission)
+    {
+        return $rol->givePermissionTo($permission);
     }
 }
