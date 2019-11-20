@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\Cms\System\RoleRepository;
+use App\Http\Requests\RoleRequest;
 
 class RoleController extends Controller
 {
@@ -32,7 +32,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
         $role = $this->repository->create([
             'name' => $request['name']
@@ -61,5 +61,10 @@ class RoleController extends Controller
     public function destroy($role)
     {
         return $this->repository->delete($role);
+    }
+
+    public function find($id)
+    {
+        return $this->repository->find($id);
     }
 }

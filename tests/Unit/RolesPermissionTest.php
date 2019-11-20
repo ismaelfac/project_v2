@@ -28,6 +28,7 @@ class RolesPermissionTest extends TestCase
      */
     function users_admin_can_create_roles_unit()
     {
+        $this->withoutExceptionHandling();
         //Arrange
             $this->authorUser('super-admin');
         //Act
@@ -43,7 +44,7 @@ class RolesPermissionTest extends TestCase
      */
     function users_admin_can_update_roles_unit()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         //Arrange
         $this->authorUser('super-admin');
         //Act
