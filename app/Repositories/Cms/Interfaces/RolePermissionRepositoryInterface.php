@@ -6,5 +6,4 @@ use App\Repositories\RepositoryInterfaceController;
 
 interface RolePermissionRepositoryInterface extends RepositoryInterfaceController{
     
-    public function givePermissionTo();
 }

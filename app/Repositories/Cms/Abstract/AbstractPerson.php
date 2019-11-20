@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Cms\Abstract;
 
-abstract class RolePermission
+abstract class Person
 {
     
 }
