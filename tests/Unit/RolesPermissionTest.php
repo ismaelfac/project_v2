@@ -122,7 +122,7 @@ class RolesPermissionTest extends TestCase
             $response->assertStatus(Response::HTTP_OK);
     }
 
-        /**
+    /**
      * @test
      */
     function users_admin_can_destroy_permission_unit()
@@ -145,21 +145,26 @@ class RolesPermissionTest extends TestCase
     }
 
     //roles givePermissions
-
+    /**
+     * @test
+     */
     function users_admin_can_give_permission_a_rol_unit()
     {
         $this->withoutExceptionHandling();
         //Arrange
-        $this->authorUser('super-admin');
-        
+        $this->authorUser('super-admin');       
         //Act
-
-            
+        $rol = $this->createRol('auditor');
+        $permission = $this->createPermission($rol->name.'_create');
+        $module = '1';
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', '/api/role_permissions', ['role_id' => $rol->id, 'permission_id' => $permission->id, 'module_id' => $module]);          
         //assert
             $this->assertDatabaseMissing('role_has_permissions',[
-                'permission_id' => 4,
-                'role_id' => 11
+                'permission_id' => $permission->id,
+                'role_id' => $rol->id
             ]);
-            $response->assertStatus(Response::HTTP_OK);
+            $response = assertStatus(200);
     }
 }

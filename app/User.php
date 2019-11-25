@@ -51,6 +51,13 @@ class User extends Authenticatable
         return $this->id === $model->user_id;
     }
 
+    public function scope($query, $attribute)
+    {
+        $campo = $this->findColumnTable($attribute);
+        if (trim($attribute) != "") {
+             $query->where(`{$campo}`, 'LIKE','%'.$attribute.'%');
+        }
+    }
     public function scopeName($query, $name)
     {
         if (trim($name) != "") {

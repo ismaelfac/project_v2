@@ -7,9 +7,6 @@ use App\Models\Modelsgenerals \{
     Identification, Departament, Municipality, Location, Neighborhood
 };
 use Illuminate\Support\Facades\Auth;
-use Caffeinated\Shinobi\Models\Role;
-use Caffeinated\Shinobi\Models\Permission;
-use App\Http\Middleware\isRole;
 
 trait MethodsBase
 {

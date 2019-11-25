@@ -17,6 +17,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::resource('users', 'Auth\UserController');
     Route::resource('roles', 'Auth\RoleController');
     Route::resource('permissions', 'Auth\PermissionController');
+    Route::resource('role_permissions', 'Auth\RolePermissionController');
 });
 Route::group(['middleware' => ['cors']], function () {
     Route::resource('country', 'Parameters\CountryController');

@@ -4,7 +4,6 @@ namespace App\Repositories\Cms\System;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class RoleRepository {
     protected $model;
@@ -38,7 +37,7 @@ class RoleRepository {
         return $this->model->where('id',$id)->delete($id);
     }
 
-    public function find($id)
+    public function find($id): Role
     {
         if (null == $role = $this->model->find($id)) {
             throw new ModelNotFoundException("role not found");
@@ -47,8 +46,8 @@ class RoleRepository {
         return $role;
     }
 
-    public function givePermissionCmsTo($rol, $permission)
+    public function givePermissionCmsTo($role, $permission)
     {
-        return $rol->givePermissionTo($permission);
+        return $role->givePermissionTo($permission);
     }
 }
