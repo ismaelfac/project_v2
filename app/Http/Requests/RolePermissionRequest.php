@@ -15,7 +15,7 @@ class RolePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -26,8 +26,8 @@ class RolePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required|numeric',
-            'permission_id' => 'required|numeric',
+            'id' => 'required|numeric|exists:roles',
+            'name' => 'required|string|exists:permissions',
             'module_id' => 'required|numeric'
         ];
     }

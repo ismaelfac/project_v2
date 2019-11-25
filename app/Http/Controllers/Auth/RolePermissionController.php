@@ -49,11 +49,10 @@ class RolePermissionController extends Controller
     {
         // Retrieve the validated input data...
         $validated = $request->validated();
-        $existRole = ($this->RoleRepository->find($request->role_id)?:false);
-        $ExistPermission = ($this->PermissionRepository->find($request->permission_id)?:false);
-        //dd($role.'<br>'.$permission);
-        if($validated && $existRole && $ExistPermission){
-            $role_permission = $this->RoleRepository->givePermissionCmsTo($existRole, $ExistPermission);
+        if($validated){
+            $rol = $validated['id'];
+            $permission = $validated['name'];
+            $role_permission = $this->RoleRepository->givePermissionCmsTo($rol, $permission);
             return response()->json($role_permission);
         }else{
             return response()->json('No existe el rol o el permiso');

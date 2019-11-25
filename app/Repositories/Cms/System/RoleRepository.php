@@ -4,7 +4,7 @@ namespace App\Repositories\Cms\System;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\Permission\Models\Role;
-
+use Spatie\Permission\Models\Permission;
 class RoleRepository {
     protected $model;
 
@@ -46,8 +46,10 @@ class RoleRepository {
         return $role;
     }
 
-    public function givePermissionCmsTo($role, $permission)
+    public function givePermissionCmsTo($role_id, $permission_name)
     {
+        $role = Role::find($role_id);
+        $permission = Permission::where('name',$permission_name)->get();
         return $role->givePermissionTo($permission);
     }
 }

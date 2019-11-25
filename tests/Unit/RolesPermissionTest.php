@@ -159,12 +159,13 @@ class RolesPermissionTest extends TestCase
         $module = '1';
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->json('POST', '/api/role_permissions', ['role_id' => $rol->id, 'permission_id' => $permission->id, 'module_id' => $module]);          
+        ])->json('POST', '/api/role_permissions', ['id' => $rol->id, 'name' => $permission->name, 'module_id' => $module]);          
         //assert
-            $this->assertDatabaseMissing('role_has_permissions',[
+            $this->assertDatabaseHas('role_has_permissions',[
                 'permission_id' => $permission->id,
                 'role_id' => $rol->id
             ]);
-            $response = assertStatus(200);
+            //dd($response);
+            $response->assertStatus(Response::HTTP_OK);
     }
 }
