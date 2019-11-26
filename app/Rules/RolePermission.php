@@ -3,6 +3,9 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class RolePermission implements Rule
 {
@@ -25,7 +28,7 @@ class RolePermission implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        dd($attribute.'-'.$value);
     }
 
     /**
@@ -35,6 +38,6 @@ class RolePermission implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return trans('validation.required');
     }
 }

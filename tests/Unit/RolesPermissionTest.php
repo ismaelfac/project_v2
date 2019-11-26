@@ -36,6 +36,9 @@ class RolesPermissionTest extends TestCase
                 'X-Header' => 'Value',
             ])->json('POST', '/api/roles', ['name' => 'Supervisor']);
         //assert
+        $this->assertDatabaseHas('roles',[
+            'name' => 'Supervisor'
+        ]);
             $response->assertStatus(Response::HTTP_OK);
     }
 
@@ -44,15 +47,21 @@ class RolesPermissionTest extends TestCase
      */
     function users_admin_can_update_roles_unit()
     {
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         //Arrange
         $this->authorUser('super-admin');
         //Act
+        $rol = $this->createRol('auditor');
             $response = $this->withHeaders([
                 'X-Header' => 'Value',
-            ])->json('PUT', '/api/roles/4', ['id' => 4,'name' => 'Cordinador']);
+            ])->json('PUT', '/api/roles/'.$rol, ['id' => $rol,'name' => 'cordinador']);
         //assert
-            $response->assertStatus(Response::HTTP_OK);
+        $this->assertDatabaseHas('roles',[
+            'id' => $rol,
+            'name' => 'coordinador'
+        ]);
+        
+        $response->assertStatus(Response::HTTP_OK);
     }
 
         /**
@@ -167,5 +176,16 @@ class RolesPermissionTest extends TestCase
             ]);
             //dd($response);
             $response->assertStatus(Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    function users_admin_can_update_permissions_rol_unit()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+          );
+  
     }
 }

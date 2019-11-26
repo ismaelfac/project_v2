@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\RolePermission;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleRequest extends FormRequest
 {
@@ -13,7 +17,7 @@ class RoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -22,9 +26,30 @@ class RoleRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            'name'=> 'required|max:15'
-        ];
+    {   
+        $role = Role::where('id', $this->id)->get();
+        dd($role);
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'role.name' => 'required',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'role.name' => 'required|email|unique:roles,name,'.$role->id,
+                ];
+            }
+            default:break;
+        }
     }
 }

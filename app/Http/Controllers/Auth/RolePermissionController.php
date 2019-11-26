@@ -88,9 +88,10 @@ class RolePermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RolePermissionRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        dd($validated);
     }
 
     /**

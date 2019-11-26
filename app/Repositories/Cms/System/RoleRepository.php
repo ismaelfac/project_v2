@@ -22,14 +22,15 @@ class RoleRepository {
         return $this->model->orderBy('updated_at', 'DESC')->paginate($paginate);
     }
 
-    public function create(array $data)
+    public function create(array $data, Role $role)
     {
         return $this->model->create($data);
     }
 
-    public function update($data, $role)
+    public function update($data, $id)
     {
-        return $this->model->where('id',$role)->update(['name' => $data->name]);
+        dd($data.'-'.$id);
+        return $this->model->where('id',$id)->update(['name' => $data]);
     }
 
     public function delete($id)

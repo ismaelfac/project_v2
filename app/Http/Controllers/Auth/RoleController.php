@@ -34,10 +34,10 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $role = $this->repository->create([
+        $role_create = $this->repository->create([
             'name' => $request['name']
         ]); //update roles
-        return response()->json($role);       
+        return response()->json($role_create);       
     }
 
     /**
@@ -47,9 +47,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        return $this->repository->update($request, $id);
+        $validated = $request->validated();
+        $name = $validated['name'];
+        return $this->repository->update($validated['name'], $id);
     }
 
     /**
