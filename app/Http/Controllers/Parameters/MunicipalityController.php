@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Parameters;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Modelsgenerals \{
+    Departament
+};
 
 class MunicipalityController extends Controller
 {
@@ -46,7 +49,8 @@ class MunicipalityController extends Controller
      */
     public function show($id)
     {
-        //
+        $municipalities = Departament::find($id)->municipalities()->where('departament_id', $id)->get();
+        return response()->json($municipalities, 200);
     }
 
     /**

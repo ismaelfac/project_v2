@@ -20,5 +20,9 @@ Route::group(['middleware' => ['cors','role:super-admin']], function () {
     Route::resource('role_permissions', 'Auth\RolePermissionController');
 });
 Route::group(['middleware' => ['cors']], function () {
-    Route::resource('country', 'Parameters\CountryController');
+    Route::resource('countries', 'Parameters\CountryController');
+    Route::resource('departaments', 'Parameters\DepartamentController');
+    Route::resource('municipalities', 'Parameters\MunicipalityController');
+    Route::resource('locations', 'Parameters\LocationController');
+    Route::resource('neighborhood', 'Parameters\NeighborhoodController');
 });

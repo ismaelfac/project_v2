@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Parameters;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Modelsgenerals \{
+    Municipality
+};
 
 class LocationController extends Controller
 {
@@ -46,7 +49,8 @@ class LocationController extends Controller
      */
     public function show($id)
     {
-        //
+        $locations = Municipality::find($id)->locations()->where('municipality_id', $id)->get();
+        return response()->json($locations, 200);
     }
 
     /**

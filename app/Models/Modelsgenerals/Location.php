@@ -20,7 +20,7 @@ class Location extends Model
     {
         return $this->hasMany(Property::class);
     }
-    public function beighborhoods()
+    public function neighborhoods()
     {
         return $this->hasMany(Neighborhood::class);
     }

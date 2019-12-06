@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Factory as Validator; 
+use Illuminate\Validation\Factory as Validator;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+        Schema::defaultStringLength(100);
+        setlocale(LC_MONETARY, 'co_CO');
     }
 
     /**

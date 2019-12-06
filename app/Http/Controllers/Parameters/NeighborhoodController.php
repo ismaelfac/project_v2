@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Parameters;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Modelsgenerals \{
+    Location
+};
 
 class NeighborhoodController extends Controller
 {
@@ -46,7 +49,8 @@ class NeighborhoodController extends Controller
      */
     public function show($id)
     {
-        //
+        $neighborhood = Location::find($id)->neighborhoods()->where('location_id', $id)->get();
+        return response()->json($neighborhood, 200);
     }
 
     /**

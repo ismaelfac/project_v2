@@ -23,6 +23,10 @@ class Departament extends Model
     {
         return $this->hasMany(Municipality::class);
     }
+    public function getDepartamentAttribute()
+    {
+        dd($country);
+    }
     public static function factoryDepartament()
     {
         $result = Departament::whereNotIn('id', [0, -1])->where('country_id', 45)->pluck('id')->all();
